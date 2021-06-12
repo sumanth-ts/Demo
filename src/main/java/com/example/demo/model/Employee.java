@@ -6,8 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "Employee")
 public class Employee {
-	@Id
-	public long id;
+	
+	public String id;
 	public String userId;
 	public String firstName;
 	public Employee() {
@@ -18,10 +18,10 @@ public class Employee {
 	public String mobile;
 	@Indexed(sparse = true)
 	public String password;
-	public long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getUserId() {
@@ -48,13 +48,15 @@ public class Employee {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+	
+	
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Employee(long id, String userId, String firstName, String lastName, String mobile, String password,
+	public Employee(String id, String userId, String firstName, String lastName, String mobile, String password,
 			String emailid) {
 		super();
 		this.id = id;

@@ -1,5 +1,7 @@
 package com.example.demo.mapper.impl;
 
+import java.awt.color.ProfileDataException;
+
 import org.springframework.stereotype.Component;
 
 import com.example.demo.data.EmployeeData;
@@ -15,11 +17,12 @@ public class EmployeeMapperImpl implements EmployeeMapper {
 			return null;
 		}
 		Employee emp=new Employee();
-		
+		emp.setId(profile.getUserId());
 		emp.setUserId(profile.getUserId());
 		emp.setFirstName(profile.getFirstName());
 		emp.setLastName(profile.getLastName());
-		emp.setMobile(profile.getMobile());	
+		emp.setMobile(profile.getMobile());
+		emp.setPassword(profile.getPassword());
 		return emp;
 	}
 
@@ -34,6 +37,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
 		emp.setFirstName(profile.getFirstName());
 		emp.setLastName(profile.getLastName());
 		emp.setMobile(profile.getMobile());	
+		emp.setPassword(profile.getPassword());
 		return emp;
 	}
 

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"id","userId","firstName","lastName","mobile","password"})
+@JsonPropertyOrder({"userId","firstName","lastName","mobile","password"})
 public class EmployeeData implements Serializable {
 	public EmployeeData() {
 		super();
@@ -18,6 +18,7 @@ public class EmployeeData implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@JsonProperty("firstName")
 	private String firstName;
 	@JsonProperty("userId")
@@ -27,7 +28,14 @@ public class EmployeeData implements Serializable {
 	private String lastName;
 	@JsonProperty("mobile")
 	private String mobile;
-	
+	@JsonProperty("password")
+	private String password;
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public String getFirstName() {
 		return firstName;
 	}
