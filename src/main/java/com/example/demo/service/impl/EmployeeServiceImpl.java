@@ -32,7 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public EmployeeData createEmployee(EmployeeData profileData) {
-		// TODO Auto-generated method stub
+		
 		Employee profile;
 		try {
 			profile=mapper.convertToProfileData(profileData);
@@ -43,6 +43,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 			return null;
 		}
 		
+	}
+
+	@Override
+	public EmployeeData updateEmployee(EmployeeData profileData) {
+		EmployeeData existingProfile=getEmployeeDetails(profileData.getUserId());
+		if(profileData.getFirstName()!=null && !profileData.getFirstName().isEmpty()) {
+			existingProfile.setFirstName((profileData.getFirstName()));
+		}
+		if(profileData.getLastName()!=null && !profileData.getLastName().isEmpty()) {
+			existingProfile.setLastName((profileData.getLastName()));
+		}
+		if(profileData.getMobile()!=null && !profileData.getMobile().isEmpty()) {
+			existingProfile.setMobile((profileData.getMobile()));
+		}
+		Employee profile=mapper.convertToProfileData(existingProfile);
+		
+		repository.save(profile);
+		return mapper.convertToCreateresponse(profile);
 	}
 
 	

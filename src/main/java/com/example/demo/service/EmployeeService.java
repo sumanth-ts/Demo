@@ -6,4 +6,5 @@ public interface EmployeeService {
 
 	EmployeeData getEmployeeDetails(String userId);
 	EmployeeData createEmployee(EmployeeData profileData);
+	EmployeeData updateEmployee(EmployeeData profileData);
 }

@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,6 +46,33 @@ public class EmployeeApi {
 		
 	}
 	
+	@GetMapping("/getemployee")
+	public ResponseEntity<EmployeeData> getEmployee(@RequestParam String userId){
+		EmployeeData existingEmp=null;
+		try {
+			existingEmp=employeeService.getEmployeeDetails(userId);					
+		}
+		catch(Exception e) {
+			return null;
+		}
+		return new ResponseEntity<>(existingEmp, HttpStatus.OK);
+		
+	}
+	
+//	@GetMapping("/update")
+	public ResponseEntity<EmployeeData> updateEmployee(@RequestAttribute EmployeeData profileData){
+		EmployeeData updatedEmployee=null;
+		try {
+			updatedEmployee=employeeService.updateEmployee(profileData);
+			
+		}
+		catch(Exception e) {
+			updatedEmployee=null;
+		}
+		
+		return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
+		
+	}
 	
 	
 	
