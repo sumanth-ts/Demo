@@ -1,10 +1,12 @@
 package com.example.demo.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.Repository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.data.EmployeeData;
 import com.example.demo.model.Employee;
+import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.service.EmployeeService;
 
 @RestController
@@ -23,7 +26,8 @@ public class EmployeeApi {
 	
 	@Autowired
 	EmployeeService employeeService;
-	
+	@Autowired
+	EmployeeRepository repository;
 	
 	@PostMapping("/create")
 	@ResponseBody
@@ -59,8 +63,9 @@ public class EmployeeApi {
 		
 	}
 	
-//	@GetMapping("/update")
-	public ResponseEntity<EmployeeData> updateEmployee(@RequestAttribute EmployeeData profileData){
+	@PostMapping("/update")
+	@ResponseBody
+	public ResponseEntity<EmployeeData> updateEmployee(@RequestBody EmployeeData profileData){
 		EmployeeData updatedEmployee=null;
 		try {
 			updatedEmployee=employeeService.updateEmployee(profileData);
@@ -72,6 +77,18 @@ public class EmployeeApi {
 		
 		return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
 		
+	}
+	
+	@GetMapping("delete/{userId}")
+	@ResponseBody
+	public String deleteEmployee(@PathVariable String userId) {
+		try {
+			repository.deleteByUserId(userId);
+		}
+		catch(Exception e){
+			return("error occued wile");
+		}
+		return("Employee deleted successfully");
 	}
 	
 	

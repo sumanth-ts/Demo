@@ -9,5 +9,6 @@ import com.example.demo.model.Employee;
 public interface EmployeeRepository extends MongoRepository<Employee, String> {
 	
 	public Optional<Employee> findByUserId(String userId);
+	public void deleteByUserId( String userId);
 
 }
